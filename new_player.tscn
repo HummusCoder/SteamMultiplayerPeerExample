@@ -211,7 +211,6 @@ animation = &"standing"
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_1vppo"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_iy7lw"]
-graph_offset = Vector2(-261.903, 174.127)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_rwggn")
 nodes/Animation/position = Vector2(-240, 260)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_me1ep")
@@ -270,9 +269,6 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="." node_paths=PackedStringArray("player")]
-libraries = {
-"": SubResource("AnimationLibrary_o1yrk")
-}
 tree_root = SubResource("AnimationNodeBlendTree_iy7lw")
 anim_player = NodePath("../AnimationPlayer")
 parameters/down/blend_amount = 0

@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Multiplayer Bomber"
+config/name="Fish Game"
 config/description="A multiplayer implementation of the classical bomberman game.
 One of the players should press 'host', while the other
 should type in his address and press 'play'."
