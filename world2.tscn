@@ -61,7 +61,9 @@ script = ExtResource("3_rgobh")
 position = Vector2(-1.5, 1)
 shape = SubResource("RectangleShape2D_8vxli")
 
-[node name="fisher" parent="." instance=ExtResource("4_v5p6h")]
+[node name="Players" type="Node2D" parent="."]
+
+[node name="fisher" parent="Players" instance=ExtResource("4_v5p6h")]
 position = Vector2(565, 475)
 scale = Vector2(2.095, 2.095)
 
@@ -80,7 +82,7 @@ scale = Vector2(2.605, 1)
 texture = ExtResource("3_wndad")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-spawn_path = NodePath("..")
+spawn_path = NodePath("../Players")
 
 [connection signal="body_entered" from="Raft/Mast Lower Bar/Area2D" to="Raft/Mast Lower Bar/Area2D" method="_on_body_entered"]
 [connection signal="body_exited" from="Raft/Mast Lower Bar/Area2D" to="Raft/Mast Lower Bar/Area2D" method="_on_body_exited"]

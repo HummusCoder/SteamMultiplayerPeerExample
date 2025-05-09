@@ -106,7 +106,7 @@ func _ready():
 			if status == 1:
 				#lobby_id = new_lobby_id
 				Steam.setLobbyData(new_lobby_id, "name", 
-					str(Steam.getPersonaName(), "'s Spectabulous Test Server"))
+					str(Steam.getPersonaName(), "'s Fishy Test Server"))
 				create_steam_socket()
 			else:
 				game_error.emit("Error on create lobby!")

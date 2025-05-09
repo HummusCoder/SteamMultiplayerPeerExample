@@ -11,6 +11,5 @@ func _process(_delta):
 	pass
 		
 func _on_body_entered(body):
-	print("body entered")
 	body.position.x = 565
 	body.position.y = 475
