@@ -1,0 +1,88 @@
+[gd_scene load_steps=10 format=3 uid="uid://dl7oxoy6aw45r"]
+
+[ext_resource type="Script" path="res://fisher.gd" id="1_gfxeq"]
+[ext_resource type="Texture2D" uid="uid://dpoayxj2o7yos" path="res://Idle (32x32).png" id="2_y7smo"]
+[ext_resource type="FontFile" uid="uid://knb8u535cfkw" path="res://montserrat.otf" id="3_5wvox"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gvv2b"]
+size = Vector2(23, 24)
+
+[sub_resource type="Animation" id="Animation_6qgn8"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 8, 9, 10]
+}
+
+[sub_resource type="Animation" id="Animation_eb6go"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ofwxc"]
+_data = {
+"RESET": SubResource("Animation_eb6go"),
+"idle": SubResource("Animation_6qgn8")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_rdm0c"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_cshev"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="fisher" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 31
+script = ExtResource("1_gfxeq")
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -16)
+texture = ExtResource("2_y7smo")
+hframes = 11
+
+[node name="shape" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -12)
+shape = SubResource("RectangleShape2D_gvv2b")
+
+[node name="anim_player" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ofwxc")
+}
+
+[node name="label" type="Label" parent="."]
+offset_left = -32.0
+offset_top = -47.0
+offset_right = 31.0
+offset_bottom = -24.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("3_5wvox")
+theme_override_font_sizes/font_size = 1
+text = "Player 1"
+label_settings = SubResource("LabelSettings_rdm0c")
+horizontal_alignment = 1
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_cshev")
