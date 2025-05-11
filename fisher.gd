@@ -22,8 +22,9 @@ var airJumps = 1
 	
 	#camera.current = true
 
-func _ready():
-	pass
+@rpc("any_peer", "call_local")
+func set_authority(id : int) -> void:
+	set_multiplayer_authority(id)
 
 func _physics_process(delta):
 	
@@ -108,3 +109,10 @@ func _physics_process(delta):
 			#velocity.x = input_direction * SPEED
 		momentum = velocity.x
 	move_and_slide()
+
+func set_player_name(value : String):
+	$label.text = value
+
+@rpc("any_peer", "call_local")
+func teleport(new_position : Vector2) -> void:
+	self.position = new_position

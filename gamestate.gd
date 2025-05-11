@@ -131,7 +131,7 @@ func unregister_player(id):
 @rpc("call_local")
 func load_world():
 	# Change scene.
-	var world = load("res://world.tscn").instantiate()
+	var world = load("res://world2.tscn").instantiate()
 	get_tree().get_root().add_child(world)
 	get_tree().get_root().get_node("Lobby").hide()
 
@@ -161,10 +161,10 @@ func begin_game():
 	
 	#grab the world node and player scene
 	var world : Node2D = get_tree().get_root().get_node("World")
-	var player_scene := load("res://new_player.tscn")
+	var player_scene := load("res://fisher.tscn")
 	
-	#Iterate over our connected peer ids
-	var spawn_index = 0
+	#Iterate over our connected peer ids, i commented this out
+	#var spawn_index = 0
 	
 	for peer_id in players:
 		print("PEER ID: ", peer_id)
@@ -178,14 +178,16 @@ func begin_game():
 		#Set the authorization for the player. This has to be called on all peers to stay in sync.
 		player.set_authority.rpc(peer_id)
 		
-		#Grab our location for the player.
-		var target : Vector2 = world.get_node("SpawnPoints").get_child(spawn_index).position
+		#Grab our location for the player. i commented this out
+		#var target : Vector2 = world.get_node("SpawnPoint").get_child(spawn_index).position
 		
+		var target : Vector2 = world.get_node("SpawnPoint").position
 		#The peer has authority over the player's position, so to sync it properly,
 		#we need to set that position from that peer with an RPC.
 		player.teleport.rpc_id(peer_id, target)
 		
-		spawn_index += 1
+		#i commented this out
+		#spawn_index += 1
 	
 # create_steam_socket and connect_steam_socket both create the multiplayer peer, instead
 # of _ready, for the sake of compatibility with other networking services

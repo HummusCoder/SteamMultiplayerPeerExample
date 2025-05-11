@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://dl7oxoy6aw45r"]
+[gd_scene load_steps=9 format=3 uid="uid://dl7oxoy6aw45r"]
 
 [ext_resource type="Script" path="res://fisher.gd" id="1_gfxeq"]
 [ext_resource type="Texture2D" uid="uid://dpoayxj2o7yos" path="res://Idle (32x32).png" id="2_y7smo"]
-[ext_resource type="FontFile" uid="uid://knb8u535cfkw" path="res://montserrat.otf" id="3_5wvox"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gvv2b"]
 size = Vector2(23, 24)
@@ -52,6 +51,7 @@ properties/0/spawn = true
 properties/0/replication_mode = 1
 
 [node name="fisher" type="CharacterBody2D"]
+scale = Vector2(2.1, 2.1)
 collision_layer = 2
 collision_mask = 31
 script = ExtResource("1_gfxeq")
@@ -72,17 +72,17 @@ libraries = {
 }
 
 [node name="label" type="Label" parent="."]
-offset_left = -32.0
-offset_top = -47.0
-offset_right = 31.0
-offset_bottom = -24.0
+offset_left = -44.7619
+offset_top = -35.2381
+offset_right = 135.238
+offset_bottom = -12.2381
+scale = Vector2(0.5, 0.5)
 size_flags_horizontal = 2
 size_flags_vertical = 0
-theme_override_fonts/font = ExtResource("3_5wvox")
-theme_override_font_sizes/font_size = 1
-text = "Player 1"
+text = "Hummusthing"
 label_settings = SubResource("LabelSettings_rdm0c")
 horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_cshev")
