@@ -73,13 +73,13 @@ libraries = {
 
 [node name="label" type="Label" parent="."]
 offset_left = -44.7619
-offset_top = -35.2381
+offset_top = -37.1429
 offset_right = 135.238
-offset_bottom = -12.2381
+offset_bottom = -14.1429
 scale = Vector2(0.5, 0.5)
 size_flags_horizontal = 2
 size_flags_vertical = 0
-text = "Hummusthing"
+text = "Me"
 label_settings = SubResource("LabelSettings_rdm0c")
 horizontal_alignment = 1
 autowrap_mode = 2
