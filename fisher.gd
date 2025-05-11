@@ -95,9 +95,9 @@ func _physics_process(delta):
 			######################################
 			#flips sprite when changing directions
 			######################################
-			#if ((velocity.x < 0 && facingLeft == false) || (velocity.x > 0 && facingLeft == true)):
-				#sprite.scale.x *= -1
-				#facingLeft = !facingLeft
+			if ((velocity.x < 0 && facingLeft == false) || (velocity.x > 0 && facingLeft == true)):
+				sprite.scale.x *= -1
+				facingLeft = !facingLeft
 			
 		if !is_on_floor():
 			#momentum += input_direction * AIRSPEED * delta
@@ -109,9 +109,6 @@ func _physics_process(delta):
 				#velocity.x = input_direction * SPEED
 			momentum = velocity.x
 		move_and_slide()
-	if ((velocity.x < 0 && facingLeft == false) || (velocity.x > 0 && facingLeft == true)) && is_on_floor():
-				sprite.scale.x *= -1
-				facingLeft = !facingLeft
 
 func set_player_name(value : String):
 	$label.text = value

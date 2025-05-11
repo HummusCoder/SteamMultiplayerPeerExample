@@ -49,6 +49,9 @@ _data = {
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
+properties/1/path = NodePath("sprite:scale")
+properties/1/spawn = true
+properties/1/replication_mode = 2
 
 [node name="fisher" type="CharacterBody2D"]
 scale = Vector2(2.1, 2.1)
@@ -65,6 +68,7 @@ hframes = 11
 [node name="shape" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -12)
 shape = SubResource("RectangleShape2D_gvv2b")
+one_way_collision = true
 
 [node name="anim_player" type="AnimationPlayer" parent="."]
 libraries = {
