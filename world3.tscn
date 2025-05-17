@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://d3546qds5gcfb"]
+[gd_scene load_steps=11 format=3 uid="uid://dx45ppvkp74f3"]
 
-[ext_resource type="Texture2D" uid="uid://bt4drjhft066w" path="res://solid_water.png" id="1_w012b"]
-[ext_resource type="Texture2D" uid="uid://b60ayt7fmmqmk" path="res://raft.png" id="2_xwhuj"]
-[ext_resource type="Script" path="res://OneWayPlats.gd" id="3_rgobh"]
-[ext_resource type="Texture2D" uid="uid://xn32fyqu3ncd" path="res://not_solid_water.png" id="3_wndad"]
-[ext_resource type="Script" path="res://Killzone.gd" id="5_ig7f3"]
+[ext_resource type="Texture2D" uid="uid://bt4drjhft066w" path="res://solid_water.png" id="1_78muj"]
+[ext_resource type="Texture2D" uid="uid://b60ayt7fmmqmk" path="res://raft.png" id="2_r44pj"]
+[ext_resource type="Script" path="res://OneWayPlats.gd" id="3_o5jrv"]
+[ext_resource type="PackedScene" uid="uid://dl7oxoy6aw45r" path="res://fisher.tscn" id="4_5xv76"]
+[ext_resource type="Script" path="res://Killzone.gd" id="4_xmh73"]
+[ext_resource type="Texture2D" uid="uid://xn32fyqu3ncd" path="res://not_solid_water.png" id="5_71eb0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_alrf4"]
 size = Vector2(455.085, 66.9492)
@@ -23,17 +24,17 @@ size = Vector2(3532, 314)
 [node name="Water Background" type="Sprite2D" parent="."]
 position = Vector2(570, 424)
 scale = Vector2(2.51, 1)
-texture = ExtResource("1_w012b")
+texture = ExtResource("1_78muj")
 
 [node name="Raft" type="Node2D" parent="."]
-position = Vector2(558, 403)
-scale = Vector2(0.5, 0.5)
 
 [node name="Sprite2D" type="Sprite2D" parent="Raft"]
+position = Vector2(558, 300)
 scale = Vector2(1.18, 1.18)
-texture = ExtResource("2_xwhuj")
+texture = ExtResource("2_r44pj")
 
 [node name="Base" type="StaticBody2D" parent="Raft"]
+position = Vector2(558, 300)
 scale = Vector2(1.18, 1.18)
 collision_mask = 0
 
@@ -42,28 +43,33 @@ position = Vector2(1.27118, 191.102)
 shape = SubResource("RectangleShape2D_alrf4")
 
 [node name="Mast Lower Bar" type="StaticBody2D" parent="Raft"]
-position = Vector2(8, 63)
+position = Vector2(567, 360)
 collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Raft/Mast Lower Bar"]
+position = Vector2(-1.5, 2)
 shape = SubResource("RectangleShape2D_xp0nj")
 one_way_collision = true
 
 [node name="Area2D" type="Area2D" parent="Raft/Mast Lower Bar"]
 collision_layer = 0
 collision_mask = 2
-script = ExtResource("3_rgobh")
+script = ExtResource("3_o5jrv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Raft/Mast Lower Bar/Area2D"]
+position = Vector2(-1.5, 1)
 shape = SubResource("RectangleShape2D_8vxli")
 
 [node name="Players" type="Node2D" parent="."]
 
+[node name="fisher" parent="Players" instance=ExtResource("4_5xv76")]
+position = Vector2(561, 462)
+
 [node name="Killzone" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
-script = ExtResource("5_ig7f3")
+script = ExtResource("4_xmh73")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
 position = Vector2(565, 899)
@@ -72,14 +78,10 @@ shape = SubResource("RectangleShape2D_cs2bk")
 [node name="Water Foreground" type="Sprite2D" parent="."]
 position = Vector2(551, 424)
 scale = Vector2(2.605, 1)
-texture = ExtResource("3_wndad")
+texture = ExtResource("5_71eb0")
 
 [node name="SpawnPoint" type="Node2D" parent="."]
 position = Vector2(566, 449)
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(562, 404)
-zoom = Vector2(1.685, 1.685)
 
 [node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://fisher.tscn")

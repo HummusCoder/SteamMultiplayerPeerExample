@@ -5,9 +5,9 @@ extends CharacterBody2D
 
 @export var health : float
 
-const SPEED = 280.0
-const AIRSPEED = 30.0
-const JUMP_VELOCITY = -420.0
+const SPEED = 140.0
+const AIRSPEED = 15.0
+const JUMP_VELOCITY = -210.0
 const FRICTION = 20.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.

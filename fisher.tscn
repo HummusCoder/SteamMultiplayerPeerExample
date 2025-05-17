@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dl7oxoy6aw45r"]
+[gd_scene load_steps=10 format=3 uid="uid://dl7oxoy6aw45r"]
 
 [ext_resource type="Script" path="res://fisher.gd" id="1_gfxeq"]
 [ext_resource type="Texture2D" uid="uid://dpoayxj2o7yos" path="res://Idle (32x32).png" id="2_y7smo"]
+[ext_resource type="PackedScene" uid="uid://4idxncek7lq4" path="res://rod.tscn" id="3_vrd4b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gvv2b"]
 size = Vector2(23, 24)
@@ -57,7 +58,6 @@ properties/2/spawn = true
 properties/2/replication_mode = 2
 
 [node name="fisher" type="CharacterBody2D"]
-scale = Vector2(2.1, 2.1)
 collision_layer = 2
 collision_mask = 31
 script = ExtResource("1_gfxeq")
@@ -67,6 +67,10 @@ texture_filter = 1
 position = Vector2(0, -16)
 texture = ExtResource("2_y7smo")
 hframes = 11
+
+[node name="Rod" parent="sprite" instance=ExtResource("3_vrd4b")]
+z_index = 1
+position = Vector2(10.9524, 8.38095)
 
 [node name="shape" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -12)
