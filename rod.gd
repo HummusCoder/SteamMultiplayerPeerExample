@@ -25,42 +25,44 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Input.is_action_just_pressed("debug"):
-		print("hook is at ", hook.global_position)
-		print("lineEnd is at ", line.points[1])
-	if spawnBuffer > 0:
-		spawnBuffer -= delta
-		return
-	if Input.is_action_just_pressed("fire"):
-		casting = true
-		casted = false
-		trajectoryLine.show()
-		hook.hide()
-	if Input.is_action_just_released("fire") && casting:
-		casting = false
-		casted = true
-		trajectoryLine.clear_points()
-		trajectoryLine.hide()
-		fakeHook.hide()
-		hook.global_position.x = trajectoryLine.global_position.x
-		hook.global_position.y = trajectoryLine.global_position.y
-		hook.linear_velocity = Vector2.ZERO
-		if fisher != null && fisher.has_method("_is_facing_left"):
-			if fisher._is_facing_left():
-				fireAngle.x *= -1
-		hook.apply_impulse(fireAngle * chargeTimer, Vector2.ZERO)
-		hook.show()
-		chargeTimer = 0
+	if is_multiplayer_authority():
+		if Input.is_action_just_pressed("debug"):
+			print("hook is at ", hook.global_position)
+			print("lineEnd is at ", line.points[1])
+		if spawnBuffer > 0:
+			spawnBuffer -= delta
+			return
+		if Input.is_action_just_pressed("fire"):
+			casting = true
+			casted = false
+			trajectoryLine.show()
+			hook.hide()
+		if Input.is_action_just_released("fire") && casting:
+			casting = false
+			casted = true
+			trajectoryLine.clear_points()
+			trajectoryLine.hide()
+			fakeHook.hide()
+			hook.global_position.x = trajectoryLine.global_position.x
+			hook.global_position.y = trajectoryLine.global_position.y
+			hook.linear_velocity = Vector2.ZERO
+			if fisher != null && fisher.has_method("_is_facing_left"):
+				if fisher._is_facing_left():
+					fireAngle.x *= -1
+			hook.apply_impulse(fireAngle * chargeTimer, Vector2.ZERO)
+			hook.show()
+			chargeTimer = 0
 
 func _physics_process(delta):
-	if casting:
-		chargeTimer = clamp(chargeTimer + delta, 0, 1.6)
-		fireAngle = Vector2(-300,0).rotated(trajectoryLine.get_angle_to(get_global_mouse_position()))
-		update_trajectory(fireAngle, chargeTimer, delta)
-	if casted:
-		line.show()
-		update_line()
-		hook.linear_velocity.x = move_toward(hook.linear_velocity.x, 0, AIR_RESISTANCE)
+	if is_multiplayer_authority():
+		if casting:
+			chargeTimer = clamp(chargeTimer + delta, 0, 1.6)
+			fireAngle = Vector2(-300,0).rotated(trajectoryLine.get_angle_to(get_global_mouse_position()))
+			update_trajectory(fireAngle, chargeTimer, delta)
+		if casted:
+			line.show()
+			update_line()
+			hook.linear_velocity.x = move_toward(hook.linear_velocity.x, 0, AIR_RESISTANCE)
 
 func update_trajectory(dir: Vector2, timeCharged: float, delta: float):
 	var max_points = 50
