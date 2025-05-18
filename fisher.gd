@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var anim_player = $anim_player
 @onready var sprite = $sprite
+@onready var hand = $Hand
 
 @export var health : float
 
@@ -46,26 +47,7 @@ func _physics_process(delta):
 					set_collision_mask_value(2, false)
 					set_collision_mask_value(3, false)
 					set_collision_mask_value(4, false)
-			
-			#if Input.is_action_pressed("jump"):
-				#if Input.is_action_pressed("down"):
-					#set_collision_mask_value(2, false)
-					#set_collision_mask_value(3, false)
-					#set_collision_mask_value(4, false)
-				#elif Input.is_action_just_pressed("jump") and airJumps > 0:
-					#velocity.y = JUMP_VELOCITY
-					#airJumps -= airJumps
-					#if !Input.get_axis("left", "right"):
-						#velocity.x = 0
-		
-		#Handle jump
-		#if Input.is_action_just_pressed("jump") and is_on_floor():
-			#if Input.is_action_pressed("down") and canFall:
-				#set_collision_mask_value(2, false)
-				#set_collision_mask_value(3, false)
-				#set_collision_mask_value(4, false)
-			#else:
-				#velocity.y = JUMP_VELOCITY
+
 		if is_on_floor():
 			if Input.is_action_just_pressed("jump"):
 				velocity.y = JUMP_VELOCITY
@@ -96,6 +78,7 @@ func _physics_process(delta):
 			#flips sprite when changing directions
 			######################################
 			if ((velocity.x < 0 && facingLeft == false) || (velocity.x > 0 && facingLeft == true)):
+				hand.scale.x *= -1
 				sprite.scale.x *= -1
 				facingLeft = !facingLeft
 			
@@ -112,6 +95,10 @@ func _physics_process(delta):
 
 func set_player_name(value : String):
 	$label.text = value
+
+func _is_facing_left():
+	if facingLeft:
+		return true
 
 @rpc("any_peer", "call_local")
 func teleport(new_position : Vector2) -> void:

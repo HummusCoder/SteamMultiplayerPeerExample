@@ -68,14 +68,16 @@ position = Vector2(0, -16)
 texture = ExtResource("2_y7smo")
 hframes = 11
 
-[node name="Rod" parent="sprite" instance=ExtResource("3_vrd4b")]
-z_index = 1
-position = Vector2(10.9524, 8.38095)
-
 [node name="shape" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -12)
 shape = SubResource("RectangleShape2D_gvv2b")
 one_way_collision = true
+
+[node name="Hand" type="Node2D" parent="."]
+
+[node name="Rod" parent="Hand" instance=ExtResource("3_vrd4b")]
+z_index = 1
+position = Vector2(10.9524, -7.61905)
 
 [node name="anim_player" type="AnimationPlayer" parent="."]
 libraries = {
