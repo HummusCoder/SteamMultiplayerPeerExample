@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://4idxncek7lq4"]
+[gd_scene load_steps=8 format=3 uid="uid://4idxncek7lq4"]
 
 [ext_resource type="Script" path="res://rod.gd" id="1_l30kt"]
 [ext_resource type="Texture2D" uid="uid://dv3toxgrkel08" path="res://fishingRodSmall.png" id="2_p4swk"]
+[ext_resource type="Script" path="res://Hook.gd" id="3_de3k4"]
 [ext_resource type="Texture2D" uid="uid://dk86c6xo84mcg" path="res://fishingHookSmall.png" id="3_e8rq1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3tp1x"]
@@ -9,6 +10,17 @@ radius = 9.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nbep4"]
 radius = 3.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jup4p"]
+properties/0/path = NodePath("Hook:angular_velocity")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Hook:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Hook:visible")
+properties/2/spawn = true
+properties/2/replication_mode = 2
 
 [node name="Rod" type="Node2D"]
 script = ExtResource("1_l30kt")
@@ -31,8 +43,9 @@ default_color = Color(0.230315, 0.230315, 0.230315, 1)
 [node name="Hook" type="RigidBody2D" parent="."]
 visible = false
 position = Vector2(8, -40)
-collision_layer = 0
+collision_layer = 4
 collision_mask = 0
+script = ExtResource("3_de3k4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hook"]
 position = Vector2(0, 1)
@@ -76,3 +89,6 @@ bias = 0.9
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(5.32, 5.32)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_jup4p")

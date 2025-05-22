@@ -59,7 +59,7 @@ properties/2/replication_mode = 2
 
 [node name="fisher" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 31
+collision_mask = 3
 script = ExtResource("1_gfxeq")
 
 [node name="sprite" type="Sprite2D" parent="."]

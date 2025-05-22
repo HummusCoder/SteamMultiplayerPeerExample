@@ -8,7 +8,7 @@ extends Node2D
 var fisher : Node2D
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var chargeTimer = 0
-var spawnBuffer = 1
+var spawnBuffer = 0.5
 var fireAngle = Vector2.ZERO
 
 var casting = false
@@ -26,23 +26,25 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if is_multiplayer_authority():
-		if Input.is_action_just_pressed("debug"):
-			print("hook is at ", hook.global_position)
-			print("lineEnd is at ", line.points[1])
 		if spawnBuffer > 0:
 			spawnBuffer -= delta
 			return
 		if Input.is_action_just_pressed("fire"):
+			fisher.casted = false
 			casting = true
 			casted = false
 			trajectoryLine.show()
 			hook.hide()
+			line.hide()
 		if Input.is_action_just_released("fire") && casting:
+			fisher.casted = true
 			casting = false
 			casted = true
 			trajectoryLine.clear_points()
 			trajectoryLine.hide()
 			fakeHook.hide()
+			hook.stuck = false
+			hook.gravity_scale = 1
 			hook.global_position.x = trajectoryLine.global_position.x
 			hook.global_position.y = trajectoryLine.global_position.y
 			hook.linear_velocity = Vector2.ZERO
@@ -62,7 +64,8 @@ func _physics_process(delta):
 		if casted:
 			line.show()
 			update_line()
-			hook.linear_velocity.x = move_toward(hook.linear_velocity.x, 0, AIR_RESISTANCE)
+			hook.casted = true
+			#hook.linear_velocity.x = move_toward(hook.linear_velocity.x, 0, AIR_RESISTANCE)
 
 func update_trajectory(dir: Vector2, timeCharged: float, delta: float):
 	var max_points = 50

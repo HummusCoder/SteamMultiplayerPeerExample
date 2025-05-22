@@ -13,6 +13,7 @@ const FRICTION = 20.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var casted : bool = false
 var facingLeft = false
 var canFall = false
 var momentum = 0
@@ -77,7 +78,7 @@ func _physics_process(delta):
 			######################################
 			#flips sprite when changing directions
 			######################################
-			if ((velocity.x < 0 && facingLeft == false) || (velocity.x > 0 && facingLeft == true)):
+			if ((velocity.x < 0 && facingLeft == false) || (velocity.x > 0 && facingLeft == true)) && !casted:
 				hand.scale.x *= -1
 				sprite.scale.x *= -1
 				facingLeft = !facingLeft
