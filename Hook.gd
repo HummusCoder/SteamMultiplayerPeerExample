@@ -17,10 +17,7 @@ func _process(_delta):
 
 func _physics_process(_delta):
 	if stuck && linear_velocity.x != 0:
-		linear_velocity.x = 0
-		linear_velocity.y = 0
-		angular_velocity = 0
-		gravity_scale = 0
+		syncStuck()
 	if casted && submerged:
 		when_submerged()
 	elif casted && !submerged:
@@ -33,3 +30,10 @@ func when_submerged():
 
 func when_stuck():
 	stuck = true
+
+@rpc("any_peer", "call_local")
+func syncStuck() -> void:
+	linear_velocity.x = 0
+	linear_velocity.y = 0
+	angular_velocity = 0
+	gravity_scale = 0
