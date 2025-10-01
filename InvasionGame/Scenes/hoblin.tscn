@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://bdqm21wnq55fr"]
+
+[ext_resource type="Texture2D" uid="uid://b7njr7mty1l3m" path="res://InvasionGame/Assets/temp_body.png" id="1_8lr4i"]
+[ext_resource type="Texture2D" uid="uid://bvthcsg02y8e7" path="res://InvasionGame/Assets/shadow.png" id="1_iewdx"]
+[ext_resource type="Script" path="res://InvasionGame/Scripts/hoblin.gd" id="1_nr5yv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_00gno"]
+size = Vector2(60, 80)
+
+[node name="Hoblin" type="CharacterBody2D"]
+script = ExtResource("1_nr5yv")
+
+[node name="ShadowSprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_iewdx")
+
+[node name="HoblinSprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -40)
+texture = ExtResource("1_8lr4i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -40)
+shape = SubResource("RectangleShape2D_00gno")
