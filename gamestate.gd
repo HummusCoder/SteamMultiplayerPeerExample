@@ -131,7 +131,7 @@ func unregister_player(id):
 @rpc("call_local")
 func load_world():
 	# Change scene.
-	var world = load("res://world2.tscn").instantiate()
+	var world = load("res://InvasionGame/Scenes/invasion_world.tscn").instantiate()
 	get_tree().get_root().add_child(world)
 	get_tree().get_root().get_node("Lobby").hide()
 
@@ -161,7 +161,7 @@ func begin_game():
 	
 	#grab the world node and player scene
 	var world : Node2D = get_tree().get_root().get_node("World")
-	var player_scene := load("res://fisher.tscn")
+	var player_scene := load("res://InvasionGame/Scenes/gnome.tscn")
 	
 	#Iterate over our connected peer ids, i commented this out
 	#var spawn_index = 0

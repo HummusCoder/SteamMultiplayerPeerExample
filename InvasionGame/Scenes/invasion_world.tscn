@@ -1,13 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://dltuaf2shbn46"]
+[gd_scene load_steps=2 format=3 uid="uid://dltuaf2shbn46"]
 
 [ext_resource type="Texture2D" uid="uid://bg0jm8d1nr1fe" path="res://InvasionGame/Assets/background.png" id="1_ss0j8"]
-[ext_resource type="PackedScene" uid="uid://bdqm21wnq55fr" path="res://InvasionGame/Scenes/hoblin.tscn" id="2_ahtgb"]
 
 [node name="World" type="Node2D"]
 
 [node name="Background" type="Sprite2D" parent="."]
+modulate = Color(0.446777, 0.446777, 0.446777, 1)
 texture = ExtResource("1_ss0j8")
 
 [node name="Players" type="Node2D" parent="."]
 
-[node name="Hoblin" parent="." instance=ExtResource("2_ahtgb")]
+[node name="SpawnPoint" type="Node2D" parent="."]
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://InvasionGame/Scenes/gnome.tscn")
+spawn_path = NodePath("../Players")
